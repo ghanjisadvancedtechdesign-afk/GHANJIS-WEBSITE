@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHANJIS ADVANCED TECH DESIGN — Solar, Security &amp; Connectivity, Limbe Cameroon</title>
+<meta name="description" content="GHANJIS ADVANCED TECH DESIGN installs solar power systems, CCTV security, Starlink &amp; satellite, audio-visual broadcasting and graphics design across Limbe and Buea, Cameroon.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0a0e18;
+    --dusk:#141d33;
+    --panel:#1b2540;
+    --panel-line:#2c3856;
+    --gold:#f2a93b;
+    --gold-dim:#c98a2b;
+    --ember:#e8622c;
+    --cyan:#54d6c9;
+    --sand:#ede6d6;
+    --sand-dim:#d8cfba;
+    --ink-on-sand:#181310;
+    --muted:#8b96b0;
+    --muted-on-sand:#6b6255;
+    --radius:2px;
+  }
+
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--ink);
+    color:var(--sand);
+    font-family:'IBM Plex Sans', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  a{color:inherit; text-decoration:none;}
+  h1,h2,h3,h4{font-family:'Space Grotesk', sans-serif; font-weight:600; letter-spacing:-0.01em;}
+  .mono{font-family:'IBM Plex Mono', monospace;}
+
+  img,svg{display:block; max-width:100%;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 28px;}
+
+  :focus-visible{outline:2px solid var(--gold); outline-offset:3px;}
+
+  /* ---------- eyebrow / label system ---------- */
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--gold);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:14px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px; height:1px;
+    background:var(--gold);
+    display:inline-block;
+  }
+  .eyebrow.on-sand{color:var(--ember);}
+
+  /* ---------- nav ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background:rgba(10,14,24,0.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid rgba(255,255,255,0.06);
+  }
+  nav{
+    max-width:1180px; margin:0 auto; padding:16px 28px;
+    display:flex; align-items:center; justify-content:space-between;
+  }
+  .brand{
+    display:flex; align-items:center; gap:10px;
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700; font-size:15px; letter-spacing:0.01em;
+    color:var(--sand);
+  }
+  .brand .mark{
+    width:30px; height:30px; flex-shrink:0;
+  }
+  .brand .full{white-space:nowrap;}
+  .brand .full small{display:block; font-family:'IBM Plex Mono',monospace; font-weight:400; font-size:9px; letter-spacing:0.12em; color:var(--muted); text-transform:uppercase; margin-top:2px;}
+
+  .nav-links{display:flex; align-items:center; gap:32px;}
+  .nav-links a{
+    font-size:13px; font-family:'IBM Plex Mono', monospace;
+    letter-spacing:0.04em; color:var(--muted);
+    transition:color .2s ease;
+  }
+  .nav-links a:hover{color:var(--gold);}
+  .nav-cta{
+    border:1px solid var(--gold);
+    color:var(--gold) !important;
+    padding:9px 16px;
+    font-size:12px !important;
+  }
+  .nav-cta:hover{background:var(--gold); color:var(--ink) !important;}
+  .nav-toggle{display:none; background:none; border:none; color:var(--sand); font-size:22px; cursor:pointer;}
+
+  @media (max-width:820px){
+    .nav-links{
+      position:fixed; top:64px; left:0; right:0;
+      background:var(--dusk);
+      flex-direction:column; align-items:stretch;
+      gap:0; padding:8px 0 20px;
+      transform:translateY(-8px);
+      opacity:0; visibility:hidden;
+      transition:opacity .2s ease, transform .2s ease, visibility .2s;
+      border-bottom:1px solid var(--panel-line);
+    }
+    .nav-links.open{opacity:1; visibility:visible; transform:translateY(0);}
+    .nav-links a{padding:14px 28px; font-size:14px;}
+    .nav-cta{border:none; margin-top:6px;}
+    .nav-toggle{display:block;}
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;
+    min-height:100svh;
+    display:flex; align-items:center;
+    padding:120px 0 80px;
+    background:
+      radial-gradient(ellipse 900px 500px at 78% 12%, rgba(242,169,59,0.14), transparent 60%),
+      linear-gradient(180deg, var(--ink) 0%, var(--dusk) 100%);
+    overflow:hidden;
+  }
+  .hero-grid{
+    display:grid; grid-template-columns:1.15fr 0.85fr; gap:60px; align-items:center;
+    position:relative; z-index:2; width:100%;
+  }
+  .hero h1{
+    font-size:clamp(2.4rem, 5vw, 4rem);
+    line-height:1.04;
+    color:var(--sand);
+  }
+  .hero h1 em{
+    font-style:normal;
+    background:linear-gradient(100deg, var(--gold), var(--ember));
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+  }
+  .hero p.lede{
+    margin-top:22px;
+    max-width:46ch;
+    font-size:17px;
+    color:var(--muted);
+  }
+  .hero-ctas{display:flex; gap:14px; margin-top:34px; flex-wrap:wrap;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:14px 24px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px; letter-spacing:0.03em;
+    border-radius:var(--radius);
+    cursor:pointer;
+    transition:transform .15s ease, background .2s ease, color .2s ease, border-color .2s ease;
+    border:1px solid transparent;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:var(--gold); color:var(--ink);}
+  .btn-primary:hover{background:#ffbf5e;}
+  .btn-ghost{border-color:rgba(237,230,214,0.28); color:var(--sand);}
+  .btn-ghost:hover{border-color:var(--sand);}
+
+  .hero-stats{
+    display:flex; gap:34px; margin-top:52px; flex-wrap:wrap;
+  }
+  .hero-stats div{border-left:1px solid var(--panel-line); padding-left:14px;}
+  .hero-stats .num{font-family:'Space Grotesk'; font-size:1.5rem; color:var(--sand); font-weight:600;}
+  .hero-stats .lbl{font-family:'IBM Plex Mono'; font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:0.08em; margin-top:2px;}
+
+  /* schematic signature element in hero */
+  .schematic{
+    position:relative;
+    background:rgba(255,255,255,0.02);
+    border:1px solid var(--panel-line);
+    border-radius:var(--radius);
+    padding:26px 22px 20px;
+  }
+  .schematic .cap{
+    font-family:'IBM Plex Mono'; font-size:11px; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--cyan); display:flex; justify-content:space-between; margin-bottom:14px;
+  }
+  .schematic svg{width:100%; height:auto;}
+  .flow-line{
+    stroke-dasharray:6 5;
+    animation:flow 1.4s linear infinite;
+  }
+  @keyframes flow{ to{ stroke-dashoffset:-22; } }
+  .schematic .node-label{ font-family:'IBM Plex Mono'; font-size:9.5px; fill:var(--muted); }
+  .schematic .node-value{ font-family:'IBM Plex Mono'; font-size:9.5px; fill:var(--gold); }
+
+  /* ---------- ticker ---------- */
+  .ticker{
+    border-top:1px solid rgba(255,255,255,0.08);
+    border-bottom:1px solid rgba(255,255,255,0.08);
+    background:var(--ink);
+    overflow:hidden;
+    padding:14px 0;
+    position:relative; z-index:2;
+  }
+  .ticker-track{
+    display:flex; gap:0; width:max-content;
+    animation:scroll-x 28s linear infinite;
+  }
+  @keyframes scroll-x{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+  .ticker-track span{
+    font-family:'IBM Plex Mono'; font-size:13px; letter-spacing:0.05em;
+    color:var(--muted); padding:0 26px; white-space:nowrap;
+    border-right:1px solid var(--panel-line);
+  }
+  .ticker-track span b{color:var(--gold); font-weight:500;}
+
+  /* ---------- generic section ---------- */
+  section{padding:110px 0;}
+  .section-head{
+    display:flex; justify-content:space-between; align-items:flex-end; gap:30px;
+    margin-bottom:56px; flex-wrap:wrap;
+  }
+  .section-head h2{font-size:clamp(1.8rem,3.4vw,2.6rem); max-width:16ch;}
+  .section-head p{color:var(--muted); max-width:38ch; font-size:15px;}
+
+  /* ---------- services ---------- */
+  .services{background:var(--ink);}
+  .service-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:1px;
+    background:var(--panel-line);
+    border:1px solid var(--panel-line);
+  }
+  .service-card{
+    background:var(--ink);
+    padding:36px 30px;
+    transition:background .25s ease;
+  }
+  .service-card:hover{background:var(--dusk);}
+  .service-card .icon{width:38px; height:38px; color:var(--gold); margin-bottom:22px;}
+  .service-card h3{font-size:1.15rem; margin-bottom:10px; color:var(--sand);}
+  .service-card p{font-size:14px; color:var(--muted);}
+  .service-card .tag{
+    display:inline-block; margin-top:16px;
+    font-family:'IBM Plex Mono'; font-size:10.5px; letter-spacing:0.07em;
+    color:var(--cyan); text-transform:uppercase;
+  }
+  @media (max-width:900px){ .service-grid{grid-template-columns:1fr 1fr;} }
+  @media (max-width:600px){ .service-grid{grid-template-columns:1fr;} }
+
+  /* ---------- work / case studies ---------- */
+  .work{background:var(--sand); color:var(--ink-on-sand);}
+  .work .section-head p{color:var(--muted-on-sand);}
+  .work .section-head h2{color:var(--ink-on-sand);}
+  .case{
+    display:grid; grid-template-columns:0.9fr 1.1fr; gap:0;
+    border:1px solid var(--sand-dim);
+    margin-bottom:26px;
+    background:#fff;
+  }
+  .case-visual{
+    background:var(--ink);
+    padding:30px;
+    display:flex; flex-direction:column; justify-content:space-between;
+    min-height:220px;
+    position:relative;
+  }
+  .case-visual .kw{font-family:'IBM Plex Mono'; font-size:11px; color:var(--cyan); letter-spacing:0.08em; text-transform:uppercase;}
+  .case-visual .big{font-family:'Space Grotesk'; font-size:2.6rem; color:var(--gold); font-weight:600; margin-top:10px;}
+  .case-visual .unit{font-family:'IBM Plex Mono'; font-size:12px; color:var(--muted);}
+  .case-body{padding:34px 36px;}
+  .case-body .status{
+    display:inline-block; font-family:'IBM Plex Mono'; font-size:10.5px; letter-spacing:0.06em;
+    text-transform:uppercase; padding:4px 9px; border-radius:20px;
+    margin-bottom:14px;
+  }
+  .status.done{background:rgba(84,214,201,0.14); color:#128f81;}
+  .status.progress{background:rgba(232,98,44,0.12); color:var(--ember);}
+  .case-body h3{font-size:1.3rem; margin-bottom:10px;}
+  .case-body p{font-size:14.5px; color:var(--muted-on-sand); margin-bottom:16px;}
+  .spec-list{display:flex; flex-wrap:wrap; gap:8px 22px; font-family:'IBM Plex Mono'; font-size:12px; color:#4a4237;}
+  .spec-list li{list-style:none;}
+  .spec-list li b{color:var(--ink-on-sand); font-weight:500;}
+  @media (max-width:760px){ .case{grid-template-columns:1fr;} }
+
+  /* ---------- about ---------- */
+  .about{background:var(--ink);}
+  .about-grid{display:grid; grid-template-columns:0.9fr 1.1fr; gap:70px; align-items:center;}
+  .about h2{font-size:clamp(1.8rem,3.2vw,2.4rem); margin-bottom:20px;}
+  .about p{color:var(--muted); font-size:15.5px; margin-bottom:16px; max-width:52ch;}
+  .founder-card{
+    border:1px solid var(--panel-line); padding:26px;
+    background:var(--dusk);
+  }
+  .founder-card .name{font-family:'Space Grotesk'; font-size:1.2rem; color:var(--sand);}
+  .founder-card .role{font-family:'IBM Plex Mono'; font-size:11.5px; color:var(--gold); letter-spacing:0.06em; text-transform:uppercase; margin-top:4px;}
+  .founder-card .loc{margin-top:18px; font-size:13.5px; color:var(--muted); display:flex; gap:8px; align-items:center;}
+  .about-list{list-style:none; margin-top:26px; display:grid; gap:12px;}
+  .about-list li{display:flex; gap:12px; font-size:14.5px; color:var(--sand);}
+  .about-list li::before{content:"—"; color:var(--gold); flex-shrink:0;}
+
+  /* ---------- contact ---------- */
+  .contact{
+    background:linear-gradient(180deg, var(--dusk), var(--ink));
+    text-align:left;
+  }
+  .contact-grid{display:grid; grid-template-columns:1.1fr 0.9fr; gap:60px;}
+  .contact h2{font-size:clamp(2rem,4vw,3rem); max-width:14ch; margin-bottom:20px;}
+  .contact p.lede{color:var(--muted); max-width:44ch; margin-bottom:34px;}
+  .contact-methods{display:grid; gap:0; border-top:1px solid var(--panel-line);}
+  .contact-methods a, .contact-methods .row{
+    display:flex; justify-content:space-between; align-items:center;
+    padding:18px 0; border-bottom:1px solid var(--panel-line);
+    font-size:15px;
+  }
+  .contact-methods a{transition:color .2s ease;}
+  .contact-methods a:hover{color:var(--gold);}
+  .contact-methods .lbl{font-family:'IBM Plex Mono'; font-size:11px; color:var(--muted); letter-spacing:0.07em; text-transform:uppercase;}
+  .hours-card{
+    border:1px solid var(--panel-line); padding:28px; background:rgba(255,255,255,0.02);
+    height:fit-content;
+  }
+  .hours-card h4{font-size:13px; font-family:'IBM Plex Mono'; letter-spacing:0.07em; text-transform:uppercase; color:var(--cyan); margin-bottom:16px;}
+  .hours-row{display:flex; justify-content:space-between; font-size:14px; padding:9px 0; border-bottom:1px dashed var(--panel-line); color:var(--muted);}
+  .hours-row b{color:var(--sand); font-weight:500;}
+  .hours-row:last-child{border-bottom:none;}
+
+  footer{
+    background:var(--ink); border-top:1px solid var(--panel-line);
+    padding:34px 0;
+  }
+  .foot-row{display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:14px;}
+  .foot-row p{font-family:'IBM Plex Mono'; font-size:12px; color:var(--muted);}
+
+  /* reveal on scroll */
+  .reveal{opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  @media (max-width:900px){
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-grid .schematic{order:-1;}
+    .about-grid{grid-template-columns:1fr;}
+    .contact-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 32 32" fill="none">
+        <path d="M16 2L16 8" stroke="#f2a93b" stroke-width="2" stroke-linecap="round"/>
+        <path d="M6 6L10 10" stroke="#f2a93b" stroke-width="2" stroke-linecap="round"/>
+        <path d="M26 6L22 10" stroke="#f2a93b" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="16" cy="17" r="9" stroke="#f2a93b" stroke-width="2"/>
+        <path d="M12 17L15 20L21 14" stroke="#54d6c9" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span class="full">GHANJIS ADVANCED TECH DESIGN<small>Solar · Security · Connectivity</small></span>
+    </div>
+    <div class="nav-links" id="navLinks">
+      <a href="#services">Services</a>
+      <a href="#work">Work</a>
+      <a href="#about">About</a>
+      <a href="#contact" class="nav-cta">Talk to us</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">☰</button>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Limbe &amp; Buea, Cameroon</div>
+      <h1>Power that doesn't wait <em>for the grid.</em></h1>
+      <p class="lede">GHANJIS ADVANCED TECH DESIGN designs and installs off-grid and hybrid solar systems, CCTV security, Starlink &amp; satellite connectivity, and broadcast &amp; graphics work — built to run through SOCADEL cuts, not around them.</p>
+      <div class="hero-ctas">
+        <a href="#contact" class="btn btn-primary">Get a free site assessment</a>
+        <a href="#work" class="btn btn-ghost">See installed systems</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="num">2.5kW–8kW</div>
+          <div class="lbl">Systems delivered</div>
+        </div>
+        <div>
+          <div class="num">5</div>
+          <div class="lbl">Service lines</div>
+        </div>
+        <div>
+          <div class="num">100%</div>
+          <div class="lbl">Founder-led installs</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="schematic reveal">
+      <div class="cap"><span>System schematic — hybrid off-grid</span><span>Live spec</span></div>
+      <svg viewBox="0 0 320 260" fill="none">
+        <!-- sun -->
+        <circle cx="42" cy="34" r="14" stroke="#f2a93b" stroke-width="2"/>
+        <g stroke="#f2a93b" stroke-width="1.6" stroke-linecap="round">
+          <line x1="42" y1="10" x2="42" y2="3"/>
+          <line x1="42" y1="58" x2="42" y2="65"/>
+          <line x1="18" y1="34" x2="11" y2="34"/>
+          <line x1="66" y1="34" x2="73" y2="34"/>
+          <line x1="24" y1="16" x2="19" y2="11"/>
+          <line x1="60" y1="16" x2="65" y2="11"/>
+        </g>
+        <!-- panel array -->
+        <rect x="16" y="82" width="52" height="34" rx="1" stroke="#8b96b0" stroke-width="1.4"/>
+        <line x1="16" y1="93" x2="68" y2="93" stroke="#2c3856"/>
+        <line x1="16" y1="105" x2="68" y2="105" stroke="#2c3856"/>
+        <line x1="42" y1="82" x2="42" y2="116" stroke="#2c3856"/>
+        <text x="16" y="132" class="node-label">10× 160Wp PANEL</text>
+
+        <path class="flow-line" d="M68 99 H124" stroke="#f2a93b" stroke-width="1.8"/>
+
+        <!-- controller -->
+        <rect x="126" y="82" width="60" height="34" rx="1" stroke="#54d6c9" stroke-width="1.4"/>
+        <text x="132" y="102" class="node-label" fill="#54d6c9">MPPT</text>
+        <text x="132" y="113" class="node-value">60A</text>
+
+        <path class="flow-line" d="M156 116 V150" stroke="#54d6c9" stroke-width="1.8"/>
+
+        <!-- battery bank -->
+        <rect x="126" y="152" width="60" height="34" rx="1" stroke="#8b96b0" stroke-width="1.4"/>
+        <text x="132" y="172" class="node-label">4× 12V Li-ion</text>
+        <text x="132" y="183" class="node-value">48V bank</text>
+
+        <path class="flow-line" d="M186 169 H230" stroke="#f2a93b" stroke-width="1.8"/>
+
+        <!-- inverter -->
+        <rect x="232" y="152" width="72" height="34" rx="1" stroke="#f2a93b" stroke-width="1.4"/>
+        <text x="238" y="172" class="node-label" fill="#f2a93b">PURE SINE</text>
+        <text x="238" y="183" class="node-value">2500W / ATS</text>
+
+        <path class="flow-line" d="M268 152 V132" stroke="#f2a93b" stroke-width="1.8"/>
+        <path class="flow-line" d="M268 132 H304" stroke="#f2a93b" stroke-width="1.8"/>
+        <text x="230" y="126" class="node-label">out →</text>
+
+        <!-- house -->
+        <path d="M292 220 L268 240 V262 H316 V240 Z" stroke="#ede6d6" stroke-width="1.4"/>
+        <path class="flow-line" d="M268 186 V236" stroke="#f2a93b" stroke-width="1.8"/>
+        <text x="238" y="252" class="node-label">Load</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span><b>Solar Installation</b></span>
+    <span><b>CCTV Security</b></span>
+    <span><b>Starlink Setup</b></span>
+    <span><b>Satellite Dish</b></span>
+    <span><b>Audio-Visual Broadcasting</b></span>
+    <span><b>Graphics Design</b></span>
+    <span><b>Solar Installation</b></span>
+    <span><b>CCTV Security</b></span>
+    <span><b>Starlink Setup</b></span>
+    <span><b>Satellite Dish</b></span>
+    <span><b>Audio-Visual Broadcasting</b></span>
+    <span><b>Graphics Design</b></span>
+  </div>
+</div>
+
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Five disciplines. One crew that installs and maintains all of them.</h2>
+      <p>Most jobs in Limbe and Buea need more than one of these at once — a shop wants power, cameras, and a signboard in the same week. We handle it as one build.</p>
+    </div>
+
+    <div class="service-grid reveal">
+      <div class="service-card">
+        <svg class="icon" viewBox="0 0 40 40" fill="none"><rect x="6" y="10" width="28" height="18" rx="1" stroke="currentColor" stroke-width="1.6"/><line x1="6" y1="19" x2="34" y2="19" stroke="currentColor" stroke-width="1.2"/><line x1="20" y1="10" x2="20" y2="28" stroke="currentColor" stroke-width="1.2"/><line x1="20" y1="28" x2="20" y2="34" stroke="currentColor" stroke-width="1.6"/><line x1="13" y1="34" x2="27" y2="34" stroke="currentColor" stroke-width="1.6"/></svg>
+        <h3>Solar Installation</h3>
+        <p>Off-grid and hybrid systems sized to your real load — panels, MPPT controllers, lithium battery banks, inverters and automatic transfer switches, all specified before we quote.</p>
+        <span class="tag">Design → Install → Handover</span>
+      </div>
+
+      <div class="service-card">
+        <svg class="icon" viewBox="0 0 40 40" fill="none"><rect x="12" y="14" width="18" height="12" rx="1" stroke="currentColor" stroke-width="1.6"/><circle cx="21" cy="20" r="3.5" stroke="currentColor" stroke-width="1.4"/><path d="M30 17L36 14V26L30 23" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><line x1="12" y1="30" x2="12" y2="34" stroke="currentColor" stroke-width="1.6"/></svg>
+        <h3>CCTV Security</h3>
+        <p>Camera placement mapped to your blind spots, not a generic kit — with remote viewing set up on your own phone before we leave site.</p>
+        <span class="tag">Homes &amp; businesses</span>
+      </div>
+
+      <div class="service-card">
+        <svg class="icon" viewBox="0 0 40 40" fill="none"><path d="M8 30C8 30 20 6 34 12" stroke="currentColor" stroke-width="1.6"/><circle cx="8" cy="30" r="3" stroke="currentColor" stroke-width="1.4"/><path d="M20 18L28 26" stroke="currentColor" stroke-width="1.4"/><circle cx="30" cy="8" r="2" fill="currentColor"/></svg>
+        <h3>Starlink &amp; Satellite</h3>
+        <p>Dish alignment, mounting and cabling for Starlink and satellite TV, positioned for the cleanest signal your roofline allows.</p>
+        <span class="tag">Connectivity that holds</span>
+      </div>
+
+      <div class="service-card">
+        <svg class="icon" viewBox="0 0 40 40" fill="none"><line x1="20" y1="8" x2="20" y2="34" stroke="currentColor" stroke-width="1.6"/><path d="M14 14C16 12 24 12 26 14" stroke="currentColor" stroke-width="1.4"/><path d="M10 10C13 6 27 6 30 10" stroke="currentColor" stroke-width="1.4"/><line x1="13" y1="34" x2="27" y2="34" stroke="currentColor" stroke-width="1.6"/></svg>
+        <h3>Audio-Visual Broadcasting</h3>
+        <p>Sound and broadcast setup for churches, events and studios — mixed, mounted and tuned to the room, not left as a pile of boxes.</p>
+        <span class="tag">Events &amp; installations</span>
+      </div>
+
+      <div class="service-card">
+        <svg class="icon" viewBox="0 0 40 40" fill="none"><path d="M10 30L28 12L32 16L14 34L9 35L10 30Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><line x1="24" y1="16" x2="28" y2="20" stroke="currentColor" stroke-width="1.4"/></svg>
+        <h3>Graphics Design</h3>
+        <p>Signboards, branding and print-ready graphics for the same businesses we wire and power — one team, one visual identity.</p>
+        <span class="tag">Brand &amp; signage</span>
+      </div>
+
+      <div class="service-card">
+        <svg class="icon" viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="13" stroke="currentColor" stroke-width="1.6"/><path d="M20 13V20L25 24" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+        <h3>Maintenance &amp; Support</h3>
+        <p>Every system we install, we can service — battery checks, panel cleaning schedules, and fault callouts across Limbe and Buea.</p>
+        <span class="tag">After the handover</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="work" id="work">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Installed and running</h2>
+      <p>A sample of recent systems — real specs, real sites, not stock figures.</p>
+    </div>
+
+    <div class="case reveal">
+      <div class="case-visual">
+        <span class="kw">Cameroon Diving Service</span>
+        <div>
+          <div class="big">2,500<span style="font-size:1.1rem;">W</span></div>
+          <div class="unit">Hybrid off-grid system</div>
+        </div>
+      </div>
+      <div class="case-body">
+        <span class="status done">Handed over — 10 Jul 2026</span>
+        <h3>Full off-grid build, then relocated on request</h3>
+        <p>Designed and installed a complete hybrid off-grid system, then repositioned the array to a new site location as the client's setup changed — without downtime to the load it carries.</p>
+        <ul class="spec-list">
+          <li><b>10×</b> 160Wp panels</li>
+          <li><b>60A</b> MPPT controller</li>
+          <li><b>Pure sine</b> inverter/charger</li>
+          <li><b>ATS</b> auto transfer switch</li>
+          <li><b>4×</b> 12V lithium-ion batteries</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="case reveal">
+      <div class="case-visual">
+        <span class="kw">Loveland Salon, Muea-Buea</span>
+        <div>
+          <div class="big">8<span style="font-size:1.1rem;">kW</span></div>
+          <div class="unit">Solar power system</div>
+        </div>
+      </div>
+      <div class="case-body">
+        <span class="status done">Installed &amp; running</span>
+        <h3>Salon-scale power, sized for dryers and styling equipment</h3>
+        <p>An 8kW system sized for continuous salon load — heat tools, dryers and lighting running through outages without a drop in service to clients.</p>
+        <ul class="spec-list">
+          <li><b>8kW</b> capacity</li>
+          <li>Buea, Cameroon</li>
+          <li>Commercial-grade load</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="case reveal">
+      <div class="case-visual">
+        <span class="kw">Client build — in progress</span>
+        <div>
+          <div class="big">New</div>
+          <div class="unit">Solar system install</div>
+        </div>
+      </div>
+      <div class="case-body">
+        <span class="status progress">In progress</span>
+        <h3>Next system going in now</h3>
+        <p>Another solar installation is currently in progress for a new client — specification and site prep underway, with the same design-first approach behind every GHANJIS build.</p>
+        <ul class="spec-list">
+          <li>Site assessment complete</li>
+          <li>Install scheduled</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap about-grid">
+    <div class="founder-card reveal">
+      <div class="name">Chan Gracious Ghanjis</div>
+      <div class="role">Founder &amp; CEO</div>
+      <div class="loc">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M12 22s7-7.58 7-12.5A7 7 0 0 0 5 9.5C5 14.42 12 22 12 22Z" stroke="#f2a93b" stroke-width="1.6"/><circle cx="12" cy="9.5" r="2.4" stroke="#f2a93b" stroke-width="1.6"/></svg>
+        Limbe, South West Region, Cameroon
+      </div>
+    </div>
+    <div class="reveal">
+      <div class="eyebrow">About the company</div>
+      <h2>Built by one engineer, sized so the work stays hands-on</h2>
+      <p>GHANJIS ADVANCED TECH DESIGN was founded to close a specific gap: businesses and homes in Limbe and Buea needed power, security and connectivity that actually held up — not kits dropped off and left. Every system is designed against the client's real load before a single panel is ordered.</p>
+      <p>The company works across five connected disciplines, so a solar install can lead straight into CCTV coverage, a Starlink connection, or the signage a business needs to open its doors.</p>
+      <ul class="about-list">
+        <li>Every install founder-led, from site assessment to handover</li>
+        <li>Systems specified to the client's load, not sold off a shelf package</li>
+        <li>Serving homes, salons, event spaces and small businesses</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap contact-grid">
+    <div class="reveal">
+      <div class="eyebrow">Start a project</div>
+      <h2>Tell us what needs power, coverage, or a signal.</h2>
+      <p class="lede">Send your location and what you're trying to run — a shop, a home, an event — and we'll size a system before we quote anything.</p>
+
+      <div class="contact-methods">
+        <a href="tel:+237682840485">
+          <span>+237 682 840 485</span>
+          <span class="lbl">Phone / WhatsApp</span>
+        </a>
+        <a href="mailto:graciousghanjis@gmail.com">
+          <span>graciousghanjis@gmail.com</span>
+          <span class="lbl">Direct</span>
+        </a>
+        <a href="mailto:ghanjisadvancedtechdesign@gmail.com">
+          <span>ghanjisadvancedtechdesign@gmail.com</span>
+          <span class="lbl">Company</span>
+        </a>
+        <div class="row">
+          <span>Limbe &amp; Buea, South West Region</span>
+          <span class="lbl">Service area</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hours-card reveal">
+      <h4>Hours</h4>
+      <div class="hours-row"><span>Monday – Sunday</span><b>7:00 – 20:00</b></div>
+      <div class="hours-row"><span>Site assessments</span><b>By appointment</b></div>
+      <div class="hours-row"><span>Emergency callouts</span><b>On request</b></div>
+      <a href="https://wa.me/237682840485" class="btn btn-primary" style="margin-top:22px; width:100%; justify-content:center;">Message on WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-row">
+    <p>© <span id="year"></span> GHANJIS ADVANCED TECH DESIGN — Limbe, Cameroon</p>
+    <p>Solar · CCTV · Starlink &amp; Satellite · Audio-Visual · Graphics</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const toggle = document.getElementById('navToggle');
+  const links = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => {
+    const open = links.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', open);
+  });
+  links.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    links.classList.remove('open');
+    toggle.setAttribute('aria-expanded', false);
+  }));
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
